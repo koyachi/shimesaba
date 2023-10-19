@@ -253,7 +253,7 @@ func (repo *Repository) convertAlerts(resp *mackerel.AlertsResp) ([]*Alert, erro
 			closedAt = &tmpClosedAt
 		}
 		monitor, err := repo.getMonitor(alert.MonitorID)
-		if err != nil {
+		if err != nil && alert.Type != "check" {
 			return nil, err
 		}
 		a := NewAlert(
